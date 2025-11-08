@@ -1,4 +1,4 @@
-package com.example.globalfut.feature_teams
+package com.example.globalfut.modules.feature_add
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 
 @Composable
-fun TeamsScreen() {
+fun AddScreen() {
     Box(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text("🏠 Tela de Times", style = MaterialTheme.typography.headlineSmall)
+        Text("🏠 Tela de Posts", style = MaterialTheme.typography.headlineSmall)
     }
 }

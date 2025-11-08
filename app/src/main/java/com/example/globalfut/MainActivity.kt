@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.globalfut.core.navigation.AppNavHost
 import com.example.globalfut.core.navigation.BottomBar
 import com.example.globalfut.core.navigation.Screen
-import com.example.globalfut.ui.theme.GlobalFutTheme
+import com.example.globalfut.core.ui.theme.GlobalFutTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

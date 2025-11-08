@@ -1,4 +1,4 @@
-package com.example.globalfut.feature_home
+package com.example.globalfut.modules.feature_profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
@@ -9,11 +9,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material3.MaterialTheme
 
 @Composable
-fun HomeScreen() {
+fun ProfileScreen() {
     Box(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text("🏠 Tela Home", style = MaterialTheme.typography.headlineSmall)
+        Text("🏠 Tela de Perfil", style = MaterialTheme.typography.headlineSmall)
     }
 }
