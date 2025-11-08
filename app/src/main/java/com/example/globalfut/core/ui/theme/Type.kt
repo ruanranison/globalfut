@@ -1,4 +1,4 @@
-package com.example.globalfut.ui.theme
+package com.example.globalfut.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
