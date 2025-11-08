@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.NavHostController
-import com.example.globalfut.ui.theme.*
 
 @Composable
 fun BottomBar(
