@@ -10,7 +10,7 @@ import com.example.globalfut.modules.auth.screens.RegisterScreen
 @Composable
 fun AuthNavGraph(
     navController: NavHostController,
-    onLoginSuccess: () -> Unit // ⬅️ novo parâmetro
+    onLoginSuccess: () -> Unit
 ) {
     NavHost(
         navController = navController,

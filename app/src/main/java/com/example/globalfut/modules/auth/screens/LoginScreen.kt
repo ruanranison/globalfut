@@ -11,8 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.example.globalfut.core.navigation.Screen
 import com.example.globalfut.core.ui.theme.GFPrimary
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -34,7 +32,6 @@ fun LoginScreen(
             .fillMaxSize()
             .background(Color.White),
     ) {
-        // 🔹 Topo verde
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -45,7 +42,6 @@ fun LoginScreen(
                 )
         )
 
-        // 🔹 Área central com campos
         Box(
             modifier = Modifier
                 .fillMaxSize()

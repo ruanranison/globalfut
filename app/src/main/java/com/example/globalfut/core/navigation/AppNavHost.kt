@@ -7,14 +7,14 @@ import androidx.navigation.NavHostController
 fun AppNavHost(
     navController: NavHostController,
     isUserLoggedIn: Boolean,
-    onLoginSuccess: () -> Unit // ⬅️ novo parâmetro
+    onLoginSuccess: () -> Unit
 ) {
     if (isUserLoggedIn) {
         MainNavGraph(navController)
     } else {
         AuthNavGraph(
             navController = navController,
-            onLoginSuccess = onLoginSuccess // repassa a função
+            onLoginSuccess = onLoginSuccess
         )
     }
 }

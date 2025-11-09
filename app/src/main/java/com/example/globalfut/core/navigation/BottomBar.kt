@@ -29,7 +29,6 @@ fun BottomBar(
         modifier = Modifier.fillMaxWidth(),
         contentAlignment = Alignment.BottomCenter
     ) {
-        // 🔹 Container com sombra e bordas arredondadas reais
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -38,13 +37,13 @@ fun BottomBar(
                     shape = shape,
                     clip = false
                 )
-                .clip(shape) // mantém o arredondamento do fundo
+                .clip(shape)
                 .background(
                     color = MaterialTheme.colorScheme.surface.copy(alpha = 0.98f),
                     shape = shape
                 )
         ) {
-            // 🔹 NavigationBar agora transparente para respeitar as bordas do container
+
             NavigationBar(
                 containerColor = Color.Transparent,
                 tonalElevation = 0.dp
@@ -54,14 +53,21 @@ fun BottomBar(
                         selected = currentRoute == screen.route,
                         onClick = { navController.navigate(screen.route) },
                         icon = { Icon(screen.icon, contentDescription = screen.label) },
-                        label = { Text(screen.label) }
+                        label = { Text(screen.label) },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = MaterialTheme.colorScheme.primary,
+                            unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            selectedTextColor = MaterialTheme.colorScheme.primary,
+                            unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            indicatorColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                        )
                     )
                     if (index == 1) Spacer(modifier = Modifier.width(56.dp))
                 }
             }
         }
 
-        // 🔹 Botão central flutuante com sombra e posição elevada
+
         FloatingActionButton(
             onClick = onAddClick,
             containerColor = MaterialTheme.colorScheme.primary,
@@ -69,12 +75,12 @@ fun BottomBar(
             elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 8.dp),
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .offset(y = (8).dp) // sobe o botão pra "invadir" a barra
+                .offset(y = (8).dp)
         ) {
             Icon(
                 imageVector = Screen.Add.icon,
                 contentDescription = "Adicionar",
-                modifier = Modifier.size(32.dp) // ⬅️ aumenta o tamanho do ícone
+                modifier = Modifier.size(32.dp)
             )
         }
     }

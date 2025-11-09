@@ -30,7 +30,7 @@ private val DarkColors = darkColorScheme(
 
 @Composable
 fun GlobalFutTheme(
-    darkTheme: Boolean = false, // pode usar isSystemInDarkTheme() se quiser automático
+    darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) DarkColors else LightColors
