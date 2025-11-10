@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
 }
 
 android {
@@ -64,4 +65,21 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.5")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.33.2-alpha")
+
+        // Retrofit (Para consumo da API - Requisito 3)
+    val retrofit_version = "2.9.0"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit_version") // Para converter JSON em objetos Kotlin
+
+        // Room (Banco de Dados - Requisito 2)
+    val room_version = "2.6.1" // Versão estável do Room
+    implementation("androidx.room:room-runtime:$room_version")
+
+        // KTX para Coroutines e Fluxo de Dados (Requisito 4)
+    implementation("androidx.room:room-ktx:$room_version") // Suporte a Coroutines para Room
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0") // Para viewModelScope em Coroutines
+
+        // Processador de Anotações (KAPT) para gerar o código do Room
+        // Você PRECISARÁ adicionar o plugin 'kotlin-kapt' no topo do arquivo.
+    kapt("androidx.room:room-compiler:$room_version")
 }

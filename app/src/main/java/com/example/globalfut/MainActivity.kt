@@ -6,37 +6,38 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.*
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.example.globalfut.core.navigation.AppNavHost
-import com.example.globalfut.core.navigation.BottomBar
-import com.example.globalfut.core.navigation.Screen
-import com.example.globalfut.core.ui.theme.GlobalFutTheme
+import com.example.globalfut.core.AppContainer
+import com.example.globalfut.core.navigation.MainNavGraph // Assumindo esta rota
+import com.example.globalfut.core.navigation.GlobalFutBottomBar // Assumindo este componente
+import com.example.globalfut.ui.theme.GlobalFutTheme // Assumindo este tema
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AppContainer.initialize(applicationContext)
+
         setContent {
             GlobalFutTheme {
+                val playersViewModelFactory = remember { AppContainer.getPlayersViewModelFactory() }
                 val navController = rememberNavController()
-                var isUserLoggedIn by remember { mutableStateOf(false) }
+
+
+                PlayersScreen(
+                    factory = playersViewModelFactory,
+                    navController = rememberNavController()
+                )
 
                 Scaffold(
-                    bottomBar = {
-                        if (isUserLoggedIn) {
-                            BottomBar(
-                                navController = navController,
-                                onAddClick = { navController.navigate(Screen.Add.route) }
-                            )
-                        }
-                    }
-                ) { innerPadding ->
-                    Box(Modifier.padding(innerPadding)) {
-                        AppNavHost(
+                    bottomBar = { GlobalFutBottomBar(navController = navController) }
+                ) { paddingValues ->
+                    Box(Modifier.padding(paddingValues)) {
+                        MainNavGraph(
                             navController = navController,
-                            isUserLoggedIn = isUserLoggedIn,
-                            onLoginSuccess = { isUserLoggedIn = true }
+                            playersViewModelFactory = playersViewModelFactory
                         )
                     }
                 }
