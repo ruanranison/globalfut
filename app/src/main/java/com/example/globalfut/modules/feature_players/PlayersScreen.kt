@@ -16,7 +16,9 @@ import androidx.compose.ui.unit.sp
 import com.example.globalfut.core.ui.components.BFTabsOptions
 import com.example.globalfut.core.ui.components.GFHeader
 import com.example.globalfut.core.ui.components.GFSearchInput
-
+import com.example.globalfut.modules.feature_players.ui.components.PlayerCard
+import com.example.globalfut.modules.feature_players.ui.components.PlayerPostCard
+import com.example.globalfut.R
 @Composable
 fun PlayersScreen() {
     var searchQuery by remember { mutableStateOf("") }
@@ -77,25 +79,65 @@ fun PlayersScreen() {
 
 @Composable
 fun StatisticsSection() {
+    val players = listOf(
+        Triple("Gabigol", "Limoeiro - AL", Pair(23, 16)),
+        Triple("Pedro", "Maceió - AL", Pair(50, 18)),
+        Triple("Everton", "Arapiraca - AL", Pair(30, 21))
+    )
+
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Nível: 12", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        Text("Vitórias: 8", fontSize = 16.sp)
-        Text("Derrotas: 3", fontSize = 16.sp)
+        FlowRow(
+            maxItemsInEachRow = 2,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            players.forEach { (name, city, stats) ->
+                PlayerCard(
+                    name = name,
+                    city = city,
+                    posts = stats.first,
+                    age = stats.second,
+                    onDetailsClick = { println("Clicou em $name") }
+                )
+            }
+        }
     }
 }
 
+
 @Composable
 fun PublicationsSection() {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
+    val posts = listOf(
+        Triple("Felipe Santos", "Limoeiro - AL", "Mais um treino na benção de Deus."),
+        Triple("Bruno Henrique", "São Paulo - SP", "Treino intenso hoje! ⚽🔥"),
+        Triple("Pedro Silva", "Maceió - AL", "Treino finalizado com sucesso! 💪"),
+        Triple("Gabigol", "Limoeiro - AL", "Preparando para o próximo jogo ⚽"),
+        Triple("João Victor", "Recife - PE", "Trabalhando firme nos treinos 💥")
+    )
+
+    // ✅ Substitui Column por LazyColumn (scroll vertical automático)
+    androidx.compose.foundation.lazy.LazyColumn(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("📢 Últimas publicações", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-        Text("• GlobalFut anuncia torneio regional")
-        Text("• Novas estatísticas disponíveis no app")
+        items(posts.size) { index ->
+            val (name, city, text) = posts[index]
+            PlayerPostCard(
+                playerName = name,
+                playerCity = city,
+                postImage = com.example.globalfut.R.drawable.post_default, // imagem genérica
+                postText = text,
+                timeLabel = "12:32",
+                comments = (10..80).random(),
+                likes = (100..300).random()
+            )
+        }
     }
 }
+
 
