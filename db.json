@@ -17,6 +17,46 @@
             "imageUrl": "https://imgur.com/Fgr8dS3.png"
         }
     ]
-  }
-  
+  },
+  "teams": [
+    {
+      "id": 1,
+      "name": "Flamengo",
+      "city": "Rio de Janeiro",
+      "logoUrl": "https://upload.wikimedia.org/wikipedia/pt/2/2e/Flamengo_braz_logo.png",
+      "postText": "Vitória incrível no último jogo!"
+    },
+    {
+      "id": 2,
+      "name": "Palmeiras",
+      "city": "São Paulo",
+      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
+      "postText": "Treino intenso para o próximo clássico."
+    },
+    {
+      "id": 3,
+      "name": "Mirassol",
+      "city": "São Paulo",
+      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
+      "postText": "Treino intenso para o próximo clássico."
+    },
+    {
+      "id": 3,
+      "name": "Mirassol",
+      "city": "São Paulo",
+      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
+      "postText": "Treino intenso para o próximo clássico."
+    },
+    {
+      "id": 3,
+      "name": "Mirassol",
+      "city": "São Paulo",
+      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
+      "postText": "Treino intenso para o próximo clássico."
+    }
+  ]
+
 }
+
+
+
