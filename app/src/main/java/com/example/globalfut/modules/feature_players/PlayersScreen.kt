@@ -63,12 +63,19 @@ fun PlayersScreen() {
     }
 }
 
+
+
 @Composable
 fun StatisticsSection() {
     val players = listOf(
-        Triple("Gabigol", "Limoeiro - AL", Pair(23, 16)),
-        Triple("Pedro", "Maceió - AL", Pair(50, 18)),
-        Triple("Everton", "Arapiraca - AL", Pair(30, 21))
+        Triple("Gabigol", "Limoeiro - AL", Pair(23, 16)) to
+                "https://ds-images.bolavip.com/news/image/800/800/?src=https://images.bolavip.com/webp/br/full/BBR_20230813_BBR_96120_AGIF23080123174098-scaled-e1691968719739.webp",
+
+        Triple("Pedro", "Maceió - AL", Pair(50, 18)) to
+                "https://www.historiadealagoas.com.br/_next/image?url=https%3A%2F%2Fwp.historiadealagoas.com.br%2Fwp-content%2Fuploads%2F2015%2F07%2FRanilson-Fran%C3%A7a-e1555453341658.jpg&w=1920&q=75",
+
+        Triple("Everton", "Arapiraca - AL", Pair(30, 21)) to
+                "https://assets.goal.com/images/v3/blt57080a255185c54c/ruan.jpg?width=1400&upscale=true",
     )
 
     Column(
@@ -79,18 +86,22 @@ fun StatisticsSection() {
             maxItemsInEachRow = 2,
             horizontalArrangement = Arrangement.Center
         ) {
-            players.forEach { (name, city, stats) ->
+            players.forEach { (playerInfo, imageUrl) ->
+                val (name, city, stats) = playerInfo
+
                 PlayerCard(
                     name = name,
                     city = city,
                     posts = stats.first,
                     age = stats.second,
+                    imageUrl = imageUrl,
                     onDetailsClick = { println("Clicou em $name") }
                 )
             }
         }
     }
 }
+
 
 @Composable
 fun PublicationsSection() {

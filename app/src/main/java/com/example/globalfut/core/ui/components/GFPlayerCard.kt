@@ -8,20 +8,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.globalfut.R
+import coil.compose.rememberAsyncImagePainter
 import com.example.globalfut.core.ui.theme.GFPrimary
 
 @Composable
@@ -30,6 +27,7 @@ fun PlayerCard(
     city: String,
     posts: Int,
     age: Int,
+    imageUrl: String,
     onDetailsClick: () -> Unit
 ) {
     Card(
@@ -47,16 +45,14 @@ fun PlayerCard(
                 .padding(vertical = 16.dp, horizontal = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // 🖼️ Imagem e informações lado a lado
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                // Foto
                 Image(
-                    painter = painterResource(id = R.drawable.gabigol),
-                    contentDescription = "Foto do jogador",
+                    painter = rememberAsyncImagePainter(model = imageUrl),
+                    contentDescription = "Foto do jogador $name",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(80.dp)
@@ -65,7 +61,6 @@ fun PlayerCard(
 
                 Spacer(modifier = Modifier.width(10.dp))
 
-                // Informações do jogador
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.Start
@@ -76,10 +71,8 @@ fun PlayerCard(
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFF2E3A59)
                     )
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        androidx.compose.material3.Icon(
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
                             imageVector = Icons.Default.Place,
                             contentDescription = null,
                             tint = Color(0xFF2E3A59),
@@ -112,7 +105,6 @@ fun PlayerCard(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // 🔘 Botão “Ver Detalhes”
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
