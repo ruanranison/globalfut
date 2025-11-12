@@ -6,6 +6,7 @@
       "password": "123"
     }
   ],
+  
   "home": {
     "banners": [
         {
@@ -17,6 +18,23 @@
             "imageUrl": "https://imgur.com/Fgr8dS3.png"
         }
     ]
-  }
+  },
 
+  "leagues": [
+      {
+        "name": "Brasileirão",
+        "division": "Série A",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Brasileirao_logo.png"
+      },
+      {
+        "name": "Campeonato Paulista",
+        "division": "Série A1",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Paulista_logo.png"
+      },
+      {
+        "name": "Copa do Brasil",
+        "division": "",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Copa_do_Brasil_logo.png"
+      }
+  ]
 }
