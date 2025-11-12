@@ -18,42 +18,22 @@
         }
     ]
   },
-  "teams": [
-    {
-      "id": 1,
-      "name": "Flamengo",
-      "city": "Rio de Janeiro",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/pt/2/2e/Flamengo_braz_logo.png",
-      "postText": "Vitória incrível no último jogo!"
-    },
-    {
-      "id": 2,
-      "name": "Palmeiras",
-      "city": "São Paulo",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
-      "postText": "Treino intenso para o próximo clássico."
-    },
-    {
-      "id": 3,
-      "name": "Mirassol",
-      "city": "São Paulo",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
-      "postText": "Treino intenso para o próximo clássico."
-    },
-    {
-      "id": 3,
-      "name": "Mirassol",
-      "city": "São Paulo",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
-      "postText": "Treino intenso para o próximo clássico."
-    },
-    {
-      "id": 3,
-      "name": "Mirassol",
-      "city": "São Paulo",
-      "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/1/10/Palmeiras_logo.png",
-      "postText": "Treino intenso para o próximo clássico."
-    }
+  "leagues": [
+      {
+        "name": "Brasileirão",
+        "division": "Série A",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/8/89/Brasileirao_logo.png"
+      },
+      {
+        "name": "Campeonato Paulista",
+        "division": "Série A1",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Paulista_logo.png"
+      },
+      {
+        "name": "Copa do Brasil",
+        "division": "",
+        "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Copa_do_Brasil_logo.png"
+      }
   ]
   
 }
