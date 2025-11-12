@@ -126,7 +126,7 @@ fun LoginScreen(
                     if (state is LoginState.Loading)
                         CircularProgressIndicator(color = Color.White, strokeWidth = 2.dp)
                     else
-                        Text("CONTINUAR", fontSize = 16.sp)
+                        Text("ENTRAR", fontSize = 16.sp)
                 }
 
                 when (state) {
