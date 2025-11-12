@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.globalfut.modules.feature_home.HomeScreen
+import com.example.globalfut.modules.feature_home.screens.HomeScreen
 import com.example.globalfut.modules.feature_players.PlayersScreen
 import com.example.globalfut.modules.feature_profile.ProfileScreen
 import com.example.globalfut.modules.feature_teams.TeamsScreen

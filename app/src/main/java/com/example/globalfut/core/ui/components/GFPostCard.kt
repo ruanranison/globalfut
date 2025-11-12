@@ -18,10 +18,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Message
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun GFPostCard(
-    teamLogoRes: Int,
+    teamLogoUrl: String,
     teamName: String,
     userName: String,
     timestamp: String,
@@ -44,8 +45,8 @@ fun GFPostCard(
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
-                    painter = painterResource(id = teamLogoRes),
-                    contentDescription = "Logo do time",
+                    painter = rememberAsyncImagePainter(model = teamLogoUrl),
+                    contentDescription = null,
                     modifier = Modifier.size(40.dp),
                     contentScale = ContentScale.Crop
                 )

@@ -5,5 +5,18 @@
       "username": "ruan",
       "password": "123"
     }
-  ]
+  ],
+  "home": {
+    "banners": [
+        {
+            "id": 1,
+            "imageUrl": "https://i.imgur.com/UYUEXkS.png"
+        },
+        {
+            "id": 2,
+            "imageUrl": "https://imgur.com/Fgr8dS3.png"
+        }
+    ]
+  }
+  
 }

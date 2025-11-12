@@ -3,6 +3,7 @@ package com.example.globalfut.modules.auth.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -31,7 +32,6 @@ fun LoginScreen(
         systemUiController.setStatusBarColor(GFPrimary, darkIcons = false)
     }
 
-    // ✅ ViewModel manual (sem Hilt ainda)
     val viewModel = remember {
         LoginViewModel(
             UserRepository(RetrofitInstance.userService)
@@ -48,27 +48,35 @@ fun LoginScreen(
             .fillMaxSize()
             .background(Color.White)
     ) {
-        // 🟩 Cabeçalho verde com logo
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(280.dp)
-                .background(
-                    color = GFPrimary,
-                    shape = RoundedCornerShape(bottomStart = 100.dp, bottomEnd = 100.dp)
-                ),
+                .height(380.dp)
+                .clip(
+                    GenericShape { size, _ ->
+                        moveTo(0f, 0f)
+                        lineTo(0f, size.height * 0.85f)
+                        quadraticBezierTo(
+                            size.width / 2, size.height * 1.15f,
+                            size.width, size.height * 0.85f
+                        )
+                        lineTo(size.width, 0f)
+                        close()
+                    }
+                )
+                .background(GFPrimary),
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.logo_verde),
+                painter = painterResource(id = R.drawable.logo_sem_fundo),
                 contentDescription = "Logo Global Fut",
                 modifier = Modifier
-                    .width(250.dp)
+                    .width(306.dp)
+                    .height(204.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
         }
 
-        // 🧾 Formulário de login
         Box(
             modifier = Modifier
                 .fillMaxSize()
