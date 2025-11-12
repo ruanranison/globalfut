@@ -81,6 +81,6 @@ dependencies {
 
     val room_version = "2.8.1"
     implementation("androidx.room:room-runtime:$room_version")
-    // kapt
     ksp("androidx.room:room-compiler:$room_version")
+    implementation("io.coil-kt:coil-compose:2.7.0")
 }

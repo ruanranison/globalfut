@@ -22,13 +22,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.example.globalfut.core.network.RetrofitInstance
 import com.example.globalfut.core.ui.components.GFPostCard
 import com.example.globalfut.modules.feature_home.data.repository.HomeRepository
 import com.example.globalfut.modules.feature_home.data.viewmodel.HomeState
 import com.example.globalfut.modules.feature_home.data.viewmodel.HomeViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import coil.compose.rememberAsyncImagePainter
 import com.example.globalfut.core.db.DatabaseHelper
 import com.example.globalfut.core.model.post.Post
 import com.example.globalfut.core.model.post.postListMock

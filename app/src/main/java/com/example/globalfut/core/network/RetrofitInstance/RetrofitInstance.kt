@@ -2,6 +2,7 @@ package com.example.globalfut.core.network
 
 import com.example.globalfut.modules.auth.data.remote.UserService
 import com.example.globalfut.modules.feature_home.data.remote.HomeService
+import com.example.globalfut.modules.feature_players.data.remote.PlayerPostService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -32,5 +33,14 @@ object RetrofitInstance {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(HomeService::class.java)
+    }
+
+    val playerPostService: PlayerPostService by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(PlayerPostService::class.java)
     }
 }

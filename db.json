@@ -6,6 +6,7 @@
       "password": "123"
     }
   ],
+  
   "home": {
     "banners": [
         {
@@ -18,6 +19,7 @@
         }
     ]
   },
+
   "leagues": [
       {
         "name": "Brasileirão",
@@ -35,5 +37,4 @@
         "logo": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Copa_do_Brasil_logo.png"
       }
   ]
-  
 }
