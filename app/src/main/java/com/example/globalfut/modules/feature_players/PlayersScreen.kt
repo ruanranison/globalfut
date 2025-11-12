@@ -118,7 +118,6 @@ fun PublicationsSection() {
         Triple("João Victor", "Recife - PE", "Trabalhando firme nos treinos 💥")
     )
 
-    // ✅ Substitui Column por LazyColumn (scroll vertical automático)
     androidx.compose.foundation.lazy.LazyColumn(
         modifier = Modifier
             .fillMaxSize(),
@@ -130,7 +129,7 @@ fun PublicationsSection() {
             PlayerPostCard(
                 playerName = name,
                 playerCity = city,
-                postImage = com.example.globalfut.R.drawable.post_default, // imagem genérica
+                postImage = com.example.globalfut.R.drawable.post_default,
                 postText = text,
                 timeLabel = "12:32",
                 comments = (10..80).random(),

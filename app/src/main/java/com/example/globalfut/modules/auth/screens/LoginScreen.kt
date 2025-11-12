@@ -1,5 +1,6 @@
 package com.example.globalfut.modules.auth.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -7,41 +8,67 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.globalfut.R
+import com.example.globalfut.core.network.RetrofitInstance
 import com.example.globalfut.core.ui.theme.GFPrimary
+import com.example.globalfut.modules.auth.data.repository.UserRepository
+import com.example.globalfut.modules.auth.viewmodel.LoginState
+import com.example.globalfut.modules.auth.viewmodel.LoginViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit // ⬅️ callback
+    onLoginSuccess: () -> Unit
 ) {
     val systemUiController = rememberSystemUiController()
     SideEffect {
         systemUiController.setStatusBarColor(GFPrimary, darkIcons = false)
     }
 
+    // ✅ ViewModel manual (sem Hilt ainda)
+    val viewModel = remember {
+        LoginViewModel(
+            UserRepository(RetrofitInstance.userService)
+        )
+    }
+
+    val state by viewModel.state.collectAsState()
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(Color.White)
     ) {
+        // 🟩 Cabeçalho verde com logo
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(280.dp)
                 .background(
-                    GFPrimary,
+                    color = GFPrimary,
                     shape = RoundedCornerShape(bottomStart = 100.dp, bottomEnd = 100.dp)
-                )
-        )
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo_verde),
+                contentDescription = "Logo Global Fut",
+                modifier = Modifier
+                    .width(250.dp)
+                    .clip(RoundedCornerShape(12.dp))
+            )
+        }
 
+        // 🧾 Formulário de login
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -75,22 +102,10 @@ fun LoginScreen(
                     singleLine = true
                 )
 
-                OutlinedTextField(
-                    value = confirmPassword,
-                    onValueChange = { confirmPassword = it },
-                    placeholder = { Text("Confirme sua senha") },
-                    visualTransformation = PasswordVisualTransformation(),
-                    shape = RoundedCornerShape(12.dp),
-                    modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .padding(vertical = 6.dp),
-                    singleLine = true
-                )
-
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = { onLoginSuccess() }, // ⬅️ chama callback
+                    onClick = { viewModel.login(email, password) },
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
                         .height(52.dp),
@@ -100,7 +115,22 @@ fun LoginScreen(
                         contentColor = Color.White
                     )
                 ) {
-                    Text("CONTINUAR", fontSize = 16.sp)
+                    if (state is LoginState.Loading)
+                        CircularProgressIndicator(color = Color.White, strokeWidth = 2.dp)
+                    else
+                        Text("CONTINUAR", fontSize = 16.sp)
+                }
+
+                when (state) {
+                    is LoginState.Success -> onLoginSuccess()
+                    is LoginState.Error -> {
+                        Text(
+                            text = (state as LoginState.Error).message,
+                            color = Color.Red,
+                            modifier = Modifier.padding(top = 8.dp)
+                        )
+                    }
+                    else -> {}
                 }
             }
         }
