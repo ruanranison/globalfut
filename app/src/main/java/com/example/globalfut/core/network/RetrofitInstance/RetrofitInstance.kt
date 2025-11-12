@@ -35,12 +35,4 @@ object RetrofitInstance {
             .create(HomeService::class.java)
     }
 
-    val playerPostService: PlayerPostService by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(PlayerPostService::class.java)
-    }
 }
