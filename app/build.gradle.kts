@@ -64,4 +64,15 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.5")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.33.2-alpha")
     implementation("com.google.accompanist:accompanist-navigation-animation:0.33.2-alpha")
+
+    // ✅ Retrofit e Gson Converter
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+// ✅ OkHttp (opcional, mas recomendado para logs)
+    implementation("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14")
+
+// ✅ Coroutines (caso ainda não tenha)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 }
