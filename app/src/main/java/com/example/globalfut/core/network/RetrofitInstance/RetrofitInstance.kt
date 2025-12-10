@@ -10,15 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
     private const val BASE_URL = "https://my-json-server.typicode.com/ruanranison/globalfut/"
-//    private val retrofit: Retrofit = Retrofit.Builder()
-//        .baseUrl(BASE_URL)
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .build()
-//
-//    val homeApi: RemoteHomeApiDataSource = com.example.globalfut.core.network.RetrofitInstance.retrofit.create(RemoteHomeApiDataSource::class.java)
-
-
-
 
     private val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
