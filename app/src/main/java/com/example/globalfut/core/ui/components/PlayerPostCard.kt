@@ -43,7 +43,6 @@ fun PlayerPostCard(
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
 
-            // 🧍 Header
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -85,7 +84,6 @@ fun PlayerPostCard(
                     }
                 }
 
-                // ⏰ Hora
                 Column(horizontalAlignment = Alignment.End) {
                     Text(
                         text = "Hoje",
@@ -103,7 +101,6 @@ fun PlayerPostCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // 📸 Imagem da publicação
             Image(
                 painter = painterResource(id = postImage),
                 contentDescription = "Publicação de $playerName",
@@ -116,7 +113,6 @@ fun PlayerPostCard(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // 📝 Texto da publicação
             Text(
                 text = postText,
                 fontSize = 15.sp,
@@ -125,7 +121,6 @@ fun PlayerPostCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // 💬 Ícones de interação
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start,

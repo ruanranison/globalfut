@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import com.example.globalfut.core.model.post.Post
 import com.example.globalfut.core.model.post.Banner
 import com.example.globalfut.core.model.postPlayers.PlayerPost
-import com.example.globalfut.core.model.postPlayers.PlayerPostDao
 import com.example.globalfut.core.model.teams.Teams
 import com.example.globalfut.core.model.teams.TeamsDao
 
@@ -18,7 +17,7 @@ import com.example.globalfut.core.model.teams.TeamsDao
 abstract class DatabaseHelper : RoomDatabase() {
 
     abstract fun postDao(): LocalHomeDataSource
-    abstract fun playerPostDao(): PlayerPostDao
+    abstract fun playerPostDao(): LocalPlayersDataSource
     abstract fun teamsDao(): TeamsDao
 
     companion object {
