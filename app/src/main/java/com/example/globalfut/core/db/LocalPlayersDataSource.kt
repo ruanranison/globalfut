@@ -1,12 +1,12 @@
-package com.example.globalfut.core.model.postPlayers
+package com.example.globalfut.core.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.globalfut.core.model.postPlayers.PlayerPost
 
 @Dao
-interface PlayerPostDao {
-
+interface LocalPlayersDataSource {
     @Query("SELECT * FROM postPlayers")
     suspend fun getAll(): List<PlayerPost>
 
@@ -16,3 +16,4 @@ interface PlayerPostDao {
     @Query("DELETE FROM postPlayers")
     suspend fun deleteAll()
 }
+

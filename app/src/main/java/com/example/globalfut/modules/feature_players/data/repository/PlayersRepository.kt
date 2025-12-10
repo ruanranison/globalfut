@@ -1,9 +1,28 @@
 package com.example.globalfut.modules.feature_players.data.repository
 
-import com.example.globalfut.modules.feature_players.data.remote.PlayerPostService
+import android.util.Log
+import com.example.globalfut.core.db.LocalPlayersDataSource
+import com.example.globalfut.core.model.postPlayers.PlayerPost
+import com.example.globalfut.modules.feature_players.data.remote.RemotePlayersApiDataSource
 
-class PlayerPostRepository(private val api: PlayerPostService) {
+class PlayerPostRepository(
+    private val localPlayersDataSource: LocalPlayersDataSource,
+    private val remotePlayersApiDataSource: RemotePlayersApiDataSource
+) {
+    suspend fun findAll(): List<PlayerPost> {
+        var posts: List<PlayerPost>
+        try {
+            posts = remotePlayersApiDataSource.getPlayerPosts()
+            println("playerPosts: $posts")
+            localPlayersDataSource.deleteAll()
+            localPlayersDataSource.insertAll(posts)
 
-    suspend fun getPlayerPosts() = api.getPlayerPosts()
+        } catch (e: Exception) {
+            posts = localPlayersDataSource.getAll()
+        }
+        Log.d("PlayerPostRepository", "playerPosts: $posts")
+
+        return posts
+    }
 }
 

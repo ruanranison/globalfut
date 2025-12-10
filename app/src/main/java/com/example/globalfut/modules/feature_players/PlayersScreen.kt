@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -12,17 +13,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.globalfut.R
-import com.example.globalfut.core.db.DatabaseHelper
-import com.example.globalfut.core.model.postPlayers.PlayerPost
-import com.example.globalfut.core.model.postPlayers.playerPostListMock
 import com.example.globalfut.core.ui.components.BFTabsOptions
 import com.example.globalfut.core.ui.components.GFHeader
 import com.example.globalfut.core.ui.components.GFSearchInput
+import com.example.globalfut.modules.feature_players.data.viewmodel.PlayerPostState
+import com.example.globalfut.modules.feature_players.data.viewmodel.PlayerPostViewModel
 import com.example.globalfut.modules.feature_players.ui.components.PlayerCard
 import com.example.globalfut.modules.feature_players.ui.components.PlayerPostCard
 
 @Composable
-fun PlayersScreen() {
+fun PlayersScreen(viewModel: PlayerPostViewModel) {
     var searchQuery by remember { mutableStateOf("") }
     var selectedTab by remember { mutableStateOf(0) }
 
@@ -58,7 +58,7 @@ fun PlayersScreen() {
 
         when (selectedTab) {
             0 -> StatisticsSection()
-            1 -> PublicationsSection()
+            1 -> PublicationsSection(viewModel)
         }
     }
 }
@@ -104,66 +104,71 @@ fun StatisticsSection() {
 
 
 @Composable
-fun PublicationsSection() {
-    val context = LocalContext.current
-    val dao = DatabaseHelper.getInstance(context).playerPostDao()
-    var posts by remember { mutableStateOf(emptyList<PlayerPost>()) }
-    var isLoading by remember { mutableStateOf(true) }
+fun PublicationsSection(viewModel: PlayerPostViewModel) {
+    val state by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {
-        try {
-            dao.deleteAll()
-            dao.insertAll(playerPostListMock)
-            posts = dao.getAll()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        } finally {
-            isLoading = false
-        }
+        viewModel.loadPlayerPosts()
     }
 
-    when {
-        isLoading -> {
+    when (state) {
+        is PlayerPostState.Loading -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) { CircularProgressIndicator() }
         }
 
-        posts.isEmpty() -> {
+        is PlayerPostState.Error -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "Nenhuma publicação encontrada",
+                    text = (state as PlayerPostState.Error).message,
                     color = Color.Gray,
                     fontSize = 14.sp
                 )
             }
         }
 
-        else -> {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 16.dp),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                items(posts.size) { index ->
-                    val post = posts[index]
-                    PlayerPostCard(
-                        playerName = post.playerName,
-                        playerCity = post.playerCity,
-                        postImage = R.drawable.post_default,
-                        postText = post.postText,
-                        timeLabel = post.timeLabel,
-                        comments = post.commentsCount,
-                        likes = post.likesCount
+        is PlayerPostState.Success -> {
+            val posts = (state as PlayerPostState.Success).posts
+            if (posts.isEmpty()) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Nenhuma publicação encontrada",
+                        color = Color.Gray,
+                        fontSize = 14.sp
                     )
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 16.dp),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    items(posts.size) { index ->
+                        val post = posts[index]
+                        PlayerPostCard(
+                            playerName = post.playerName,
+                            playerCity = post.playerCity,
+                            postImage = R.drawable.post_default,
+                            postText = post.postText,
+                            timeLabel = post.timeLabel,
+                            comments = post.commentsCount,
+                            likes = post.likesCount
+                        )
+                    }
                 }
             }
         }
+
+        else -> {}
     }
 }

@@ -12,6 +12,8 @@ import com.example.globalfut.modules.feature_home.data.repository.HomeRepository
 import com.example.globalfut.modules.feature_home.data.viewmodel.HomeViewModel
 import com.example.globalfut.modules.feature_home.screens.HomeScreen
 import com.example.globalfut.modules.feature_players.PlayersScreen
+import com.example.globalfut.modules.feature_players.data.repository.PlayerPostRepository
+import com.example.globalfut.modules.feature_players.data.viewmodel.PlayerPostViewModel
 import com.example.globalfut.modules.feature_profile.ProfileScreen
 import com.example.globalfut.modules.feature_teams.screens.TeamsScreen
 
@@ -28,6 +30,16 @@ fun MainNavGraph(navController: NavHostController) {
             )
         }
     )
+    val playersViewModel: PlayerPostViewModel = viewModel(
+        initializer = {
+            PlayerPostViewModel(
+                PlayerPostRepository(
+                    DatabaseHelper.getInstance(context).playerPostDao(),
+                    RetrofitInstance.playersApi
+                )
+            )
+        }
+    )
     NavHost(
         navController = navController,
         startDestination = Screen.Home.route
@@ -35,7 +47,9 @@ fun MainNavGraph(navController: NavHostController) {
         composable(Screen.Home.route) { HomeScreen(
             viewModel = homeViewModel
         ) }
-        composable(Screen.Players.route) { PlayersScreen() }
+        composable(Screen.Players.route) { PlayersScreen(
+            viewModel = playersViewModel
+        ) }
         composable(Screen.Teams.route) { TeamsScreen() }
         composable(Screen.Profile.route) { ProfileScreen() }
     }

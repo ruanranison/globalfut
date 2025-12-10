@@ -33,7 +33,7 @@ class PlayerPostViewModel(private val repository: PlayerPostRepository) : ViewMo
         viewModelScope.launch {
             _state.value = PlayerPostState.Loading
             try {
-                val posts = repository.getPlayerPosts().map {
+                val posts = repository.findAll().map {
                     PlayerPostUiModel(
                         playerName = it.playerName,
                         playerCity = it.playerCity,
