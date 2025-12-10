@@ -1,7 +1,7 @@
 package com.example.globalfut.modules.feature_players.data.repository
 
 import android.util.Log
-import com.example.globalfut.core.db.LocalPlayersDataSource
+import com.example.globalfut.modules.feature_players.data.local.LocalPlayersDataSource
 import com.example.globalfut.core.model.postPlayers.PlayerPost
 import com.example.globalfut.modules.feature_players.data.remote.RemotePlayersApiDataSource
 

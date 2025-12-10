@@ -9,6 +9,8 @@ import com.example.globalfut.core.model.post.Banner
 import com.example.globalfut.core.model.postPlayers.PlayerPost
 import com.example.globalfut.core.model.teams.Teams
 import com.example.globalfut.core.model.teams.TeamsDao
+import com.example.globalfut.modules.feature_home.data.local.LocalHomeDataSource
+import com.example.globalfut.modules.feature_players.data.local.LocalPlayersDataSource
 
 @Database(
     version = 5,
