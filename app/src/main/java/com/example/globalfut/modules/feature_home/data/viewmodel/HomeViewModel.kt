@@ -23,7 +23,7 @@ class HomeViewModel(private val repository: HomeRepository) : ViewModel() {
         viewModelScope.launch {
             _state.value = HomeState.Loading
             try {
-                val banners = repository.getBanners().map { it.imageUrl }
+                val banners = repository.findAll().map { it.imageUrl }
                 _state.value = HomeState.Success(banners)
             } catch (e: Exception) {
                 _state.value = HomeState.Error("Erro ao carregar banners")

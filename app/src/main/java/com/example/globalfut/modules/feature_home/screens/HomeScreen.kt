@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.globalfut.core.network.RetrofitInstance
 import com.example.globalfut.core.ui.components.GFPostCard
@@ -34,18 +35,13 @@ import com.example.globalfut.core.model.post.Post
 import com.example.globalfut.core.model.post.postListMock
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(viewModel: HomeViewModel) {
     var searchQuery by remember { mutableStateOf("") }
     val scrollState = rememberScrollState()
 
     val systemUiController = rememberSystemUiController()
     val useDarkIcons = true
 
-    val viewModel = remember {
-        HomeViewModel(
-            HomeRepository(RetrofitInstance.homeService)
-        )
-    }
     val state by viewModel.state.collectAsState()
 
     val dao = DatabaseHelper.getInstance(context = LocalContext.current).postDao()

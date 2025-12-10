@@ -5,19 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.globalfut.core.model.post.Post
-import com.example.globalfut.core.model.post.PostDao
+import com.example.globalfut.core.model.post.Banner
 import com.example.globalfut.core.model.postPlayers.PlayerPost
 import com.example.globalfut.core.model.postPlayers.PlayerPostDao
 import com.example.globalfut.core.model.teams.Teams
 import com.example.globalfut.core.model.teams.TeamsDao
 
 @Database(
-    version = 4,
-    entities = [Post::class, PlayerPost::class, Teams::class]
+    version = 5,
+    entities = [Post::class, PlayerPost::class, Teams::class, Banner::class]
 )
 abstract class DatabaseHelper : RoomDatabase() {
 
-    abstract fun postDao(): PostDao
+    abstract fun postDao(): LocalHomeDataSource
     abstract fun playerPostDao(): PlayerPostDao
     abstract fun teamsDao(): TeamsDao
 
